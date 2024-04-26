@@ -21,9 +21,13 @@ export default function countries() {
   }, []);
 
   useEffect(() => {
-    const selected = countries.filter(country => country.name.common.toLowerCase().includes(text.toLowerCase()));
+    const selected = countries.filter(country => {
+      const countryName = country.name.common.toLowerCase();
+      const searchTerm = text.toLowerCase();
+      return countryName.includes(searchTerm);
+    });
     setSearchCountries(selected);
-  }, [text])
+  }, [text, countries]);
 
   return (
     <div>
